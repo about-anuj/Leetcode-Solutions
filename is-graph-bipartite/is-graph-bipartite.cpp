@@ -4,24 +4,19 @@
 class Solution {
 public:
     bool isBipartite(vector<vector<int>>& graph) {
-        //make the graph
-        for(int i=0;i<graph.size();i++)
-        {
-            for(auto j:graph[i])
-            {
-                g[i].push_back(j);
-            }
-        }
-        
         queue<int>q;
         vector<int>col(102,0);
         
-        for(int i=0;i<graph.size();i++){
-            if(col[i]) continue;
-        col[0]=1;
-        vis[0]++;
-        q.push(i);
-        while(!q.empty())
+        //iterate in loop to avoid disconnected compoent bug
+        for(int i=0;i<g.size();i++){
+            //if already visited then continue 
+            if(vis[i]) continue;
+           //first time we will come here second time we will only come here in case of 
+            //disconnected component so for it we have to start process again
+           col[0]=1;
+           vis[0]++;
+           q.push(i);
+         while(!q.empty())
         {
             int f=q.front();  q.pop();
             for(auto i:g[f])
@@ -32,6 +27,7 @@ public:
                 else if(!vis.count(i))
                 {
                     vis[i]++;
+                    //color neighbour with different color
                     col[i]=(col[f]==1?-1:1);
                     q.push(i);
                 }
@@ -45,6 +41,5 @@ public:
     }
     private:
     int len=0;
-    unordered_map<int,vector<int>>g;
     unordered_map<int,int>vis;
 };
