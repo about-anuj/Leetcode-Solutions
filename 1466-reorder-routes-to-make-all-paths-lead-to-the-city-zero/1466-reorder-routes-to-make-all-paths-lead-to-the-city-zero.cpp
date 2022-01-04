@@ -7,14 +7,14 @@ public:
            g[i[0]].push_back(i[1]);
            g[i[1]].push_back(i[0]);
            
-           srch.insert({i[0],i[1]});
+           srch[i[0]].insert(i[1]);
        }
         dfs(0);
         return ans;
     }
     private:
     unordered_map<int,int>vis;
-    set<pair<int,int>>srch;
+    unordered_map<int,set<int>>srch;
     unordered_map<int,vector<int>>g;
     int ans=0;
     
@@ -26,7 +26,7 @@ public:
             
             
             if(!vis.count(i)){
-                if(srch.find({node,i})!=srch.end())
+                if(srch[node].find(i)!=srch[node].end())
                 ans++;
                 
             dfs(i);
