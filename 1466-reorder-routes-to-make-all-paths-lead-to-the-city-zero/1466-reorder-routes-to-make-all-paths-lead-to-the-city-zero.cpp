@@ -4,18 +4,16 @@ public:
         
        for(auto i:conn) 
        {
-           g[i[0]].push_back(i[1]);
-           g[i[1]].push_back(i[0]);
+           g[i[0]].push_back({i[1],1});
+           g[i[1]].push_back({i[0],0});
            
-           srch[i[0]].insert(i[1]);
        }
         dfs(0);
         return ans;
     }
     private:
     unordered_map<int,int>vis;
-    unordered_map<int,unordered_set<int>>srch;
-    unordered_map<int,vector<int>>g;
+    unordered_map<int,vector<pair<int,int>>>g;
     int ans=0;
     
     void dfs(int node)
@@ -25,11 +23,11 @@ public:
         {
             
             
-            if(!vis.count(i)){
-                if(srch[node].find(i)!=srch[node].end())
+            if(!vis.count(i.first)){
+                if(i.second==1)
                 ans++;
                 
-            dfs(i);
+            dfs(i.first);
             }
          }
     }
