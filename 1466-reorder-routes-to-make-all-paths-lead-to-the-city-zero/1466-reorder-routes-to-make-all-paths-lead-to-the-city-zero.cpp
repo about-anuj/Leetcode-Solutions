@@ -14,7 +14,7 @@ public:
     }
     private:
     unordered_map<int,int>vis;
-    unordered_map<int,set<int>>srch;
+    unordered_map<int,unordered_set<int>>srch;
     unordered_map<int,vector<int>>g;
     int ans=0;
     
