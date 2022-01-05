@@ -74,32 +74,22 @@ class Solution{
         mp[tree]=new Node(tree->data);
         in(tree->right);
     }
-    
-    Node* cloneTree(Node* tree)
+    void make(Node* temp)
+    {
+        if(!temp) return;
+        
+         mp[temp]->left=temp->left;
+         mp[temp]->right=temp->right;
+         mp[temp]->random=temp->random;
+         make(temp->left);
+         make(temp->right);
+    }
+   Node* cloneTree(Node* tree)
     {
        //Your code here
        in(tree);
       //now clone by bfs
-      queue<Node*>q;
-      q.push(tree);
-      while(!q.empty())
-      {
-          int f=q.size();
-          while(f--)
-          {
-            Node* temp=q.front();
-            q.pop();
-            mp[temp]->left=temp->left;
-            mp[temp]->right=temp->right;
-            mp[temp]->random=temp->random;
-            
-            if(temp->left)
-            q.push(temp->left);
-            if(temp->right)
-            q.push(temp->right);
-            
-          }
-      }
+     make(tree);
        return mp[tree];
     }
 };
