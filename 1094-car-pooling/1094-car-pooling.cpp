@@ -2,16 +2,16 @@ class Solution {
 public:
     bool carPooling(vector<vector<int>>& trip, int cap) {
         int n=trip.size(),mx=-1;
-     
         vector<int>store(1001,0);
         for(int i=0;i<n;i++)
         {
-            for(int j=trip[i][1];j<trip[i][2];j++){
-                store[j]+=trip[i][0];
-                mx=max(mx,store[j]);
-            }
+            store[trip[i][1]]+=trip[i][0];
+            store[trip[i][2]]-=trip[i][0];   
         }
-     
-        return mx<=cap;
+       for(int i=0;i<=1000 and cap>=0;i++) 
+          cap-=store[i];
+        
+        return cap>=0;  
     }
+   
 };
