@@ -11,46 +11,28 @@
 class Solution {
 public:
     ListNode* reverseBetween(ListNode* head, int left, int right) {
-        ListNode* h1,*newhead,*prev,*nxt=NULL,*curr=head,*h2,*prev_h1; 
-        int pos=1;
+        if(left==right) return head;
+         right-=left;
+        ListNode* dummy=new ListNode(0);
+        dummy->next=head;
+        head=dummy;
         //find nodes of right and left position
-        while(curr)
+        while(--left)
         {
-         if(pos==left)
-         {    
-             h1=curr;
-             prev_h1=prev;
-         }
-         if(pos==right)
-         {
-             break;
-         }
-         prev=curr;
-         curr=curr->next;
-         pos++;   
+          head=head->next;
         }
         
-        //saparate the list
+        ListNode* start=head->next;
+        while(right--)
+        {
+            ListNode* nxt=start->next;
+            start->next=nxt->next;
+            nxt->next=head->next;
+            head->next=nxt;
+        }
         
         
-        newhead=curr;
-        nxt=curr->next;
-        
-        if(prev_h1)
-            prev_h1->next=curr->next;
-        curr->next=NULL;
-        
-        h2=h1;
-        reverse(h1);
-        
-        h2->next=nxt;
-        if(prev_h1)
-            prev_h1->next=newhead;
-        else
-            head=newhead;
-        
-        
-        return head;
+        return dummy->next;
     }
     private:
     void reverse(ListNode* head)
