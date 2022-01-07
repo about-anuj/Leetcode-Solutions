@@ -11,25 +11,20 @@
 class Solution {
 public:
     int n=0;
-    ListNode* temp;
+    vector<int>temp;
     Solution(ListNode* head) {
-        temp=head;
-        while(head)
+        
+       while(head)
         {
-           n++;
+            temp.push_back(head->val);
+            n++;
             head=head->next;
         }
     }
     
     int getRandom() {
        int x=rand()%n;
-        ListNode* t=temp;
-        while(x)
-        {
-            x--;
-            t=t->next;
-        }
-        return t->val;
+       return temp[x];
     }
 };
 
