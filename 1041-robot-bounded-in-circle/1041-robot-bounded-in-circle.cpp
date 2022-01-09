@@ -3,6 +3,7 @@ public:
     bool isRobotBounded(string ins) {
         bool n=true,s=false,e=false,w=false;
         int x=0,y=0;
+        for(int i=0;i<4;i++){
         for(auto i:ins)
         {
             if(i=='G')
@@ -62,8 +63,9 @@ public:
                 }
             }
         }
+        }
         if(x==0 and y==0) return 1;
-        if(n) return 0;
-        return 1;
+        //if(n) return 0;
+        return 0;
     }
 };
