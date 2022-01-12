@@ -11,23 +11,15 @@
  */
 class Solution {
 public:
-    void calc(TreeNode* root, TreeNode* prnt, TreeNode* newnode)
-    {
-        if(!root)
-        {
-            if(prnt->val<newnode->val)
-                prnt->right=newnode;
-            else
-                prnt->left=newnode;
-            return;
-        }
-        if(newnode->val<root->val) calc(root->left,root,newnode);
-        else calc(root->right,root,newnode);
-    }
+   
     TreeNode* insertIntoBST(TreeNode* root, int val) {
+        if(!root){
         TreeNode* newnode=new TreeNode(val);
-        if(!root) return newnode;
-        calc(root,root,newnode);
+        return newnode;
+        }    
+        if(root->val>val)  root->left= insertIntoBST(root->left,val);
+        else  root->right=insertIntoBST(root->right,val);
+        
         return root;
     }
 };
