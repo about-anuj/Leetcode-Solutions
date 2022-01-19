@@ -19,7 +19,7 @@ public:
         int i=0;
         pair<int,int>prev=pq.top(); pq.pop();
         ans+=prev.second;
-        prev.first--;
+       // prev.first--;
         while(!pq.empty())
         {
             pair<int,char>curr=pq.top();
@@ -27,8 +27,8 @@ public:
             int x=curr.first;
             char val=curr.second;
             ans+=val;
-            if(prev.first>0)pq.push({prev.first,prev.second});
-            prev={x-1,val};
+            if(prev.first-1>0)pq.push({prev.first-1,prev.second});
+            prev={x,val};
         }
         return ans;
     }
