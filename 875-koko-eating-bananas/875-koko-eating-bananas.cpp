@@ -2,7 +2,7 @@ class Solution {
 public:
     int minEatingSpeed(vector<int>& p, int h) {
         int l=1;
-     int r=*max_element(begin(p),end(p));
+     int r=1e+9;
      int ans=INT_MAX;
      while(l<=r)
      {
