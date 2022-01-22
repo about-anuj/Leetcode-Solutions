@@ -4,14 +4,17 @@ public:
    
     bool winnerSquareGame(int n) {
         memset(dp,false,sizeof(dp));
-        //dp[0]=true;
-       // dp[1]=true;
+       // dp[0]=true;
+        dp[1]=true;
      for(int i=1;i<=n;i++)
      {
       for(int j=1;j*j<=i;j++)
       {
-          dp[i] = !dp[i-(j*j)];
-          if(dp[i]) break;
+         if((!dp[i-(j*j)]))
+         {
+             dp[i]=true;
+             break;
+         }
       }
      }
         return dp[n];
