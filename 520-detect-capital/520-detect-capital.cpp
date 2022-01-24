@@ -9,13 +9,8 @@ public:
             if(islower(w[i]))
                 allcap=false;
         }
-        //AAA
-       if(first and allcap) return 1;
-        // Aaa
-        if(first and allsmall) return 1;
-        //aaa
-        if(allsmall) return 1;
+       
         
-        return 0;
+        return (first and allcap) or allsmall;
     }
 };
