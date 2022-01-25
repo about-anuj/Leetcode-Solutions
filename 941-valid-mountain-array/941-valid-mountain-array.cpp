@@ -1,18 +1,15 @@
 class Solution {
 public:
     bool validMountainArray(vector<int>& arr) {
-        int ind=max_element(begin(arr),end(arr))-begin(arr);
-        //cout<<arr[ind];
-        if(ind ==0 or ind==arr.size()-1) return 0;
-        for(int i=1;i<=ind;i++)
-            if(arr[i]<=arr[i-1])
-                return false;
+       
+       int i=0;
+        int n=size(arr);
+        while(i+1<n and arr[i]<arr[i+1]) i++;
         
-        cout<<1;
-        for(int i=ind+1;i<arr.size();i++)
-            if(arr[i]>=arr[i-1])
-                return false;
+        if(i==0 or i==n-1) return 0;
         
-        return 1;
+        while(i+1<n and arr[i]>arr[i+1]) i++;
+        
+        return i==n-1;
     }
 };
