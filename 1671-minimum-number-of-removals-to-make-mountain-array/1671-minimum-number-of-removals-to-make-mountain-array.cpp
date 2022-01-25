@@ -19,14 +19,14 @@ public:
                     m2[i]=max(m2[i],m2[j]+1);
             }
         }
-        int res=INT_MIN;
+        int res=-1;
         for(int i=0;i<n;i++)
         {
-          if(m1[i]==1||m2[i]==1)
-              continue;
-          res=max(res,m1[i]+m2[i]-1);   
+          //  cout<<m1[i]<<" "<<m2[i]<<endl;
+            if(m1[i]>1 and m2[i]>1)
+          res=max(res,(m1[i]+m2[i]-1));   
         }
-        return(n-res);
+        return n-res;
     }
     
 };
