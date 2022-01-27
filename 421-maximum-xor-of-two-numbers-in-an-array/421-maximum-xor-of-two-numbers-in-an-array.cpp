@@ -1,54 +1,49 @@
+class trie{
+public: 
+    trie* next[2];
+};
 class Solution {
 public:
-    struct trie{
-        trie* next[2];
-    };
-    int findMaximumXOR(vector<int>& v) {
-        trie* root=new trie();
+   trie* root=new trie();
+    void make_tr(int num)
+    {
+           trie* t=root;
+    for(int j=31;j>=0;j--)
+       {
+            int bit=(num>>j) & 1;
+            if(!t->next[bit]) t->next[bit]=new trie();
+            t=t->next[bit];
+
+       }     
+    }
+
+    int max_xor(int num)
+    {
         int ans=0;
-        for(auto i:v)
+        trie* t=root;
+        for(int i=31;i>=0;i--)
         {
-            int arr[32]={0};
-            int c=31;
-            int x=i;
-            while(x)
-            { 
-             arr[c--]=x%2;
-                x/=2;
-            }
-            trie* t=root;
-            for(int j=0;j<32;j++)
-            {
-                if(!t->next[arr[j]]) t->next[arr[j]]=new trie();
-                t=t->next[arr[j]];
-            }
+          bool bit=(num>>i) & 1;
+          if(t->next[!bit])
+          {
+            ans+=pow(2,i);
+            t=t->next[!bit];
+          }
+          else
+            t=t->next[bit];
         }
-        for(auto j:v)
+       // cout<<ans<<endl;
+        return ans;
+    }
+    int findMaximumXOR(vector<int>& nums) {
+        int ans=0;
+        for(auto i:nums)
         {
-            int bit[32]={0};
-            int x=j;
-            int c=31,temp=0;
-            trie* t=root;
-            while(x)
-            {
-                bit[c]=x%2;
-                x/=2;
-                //cout<<bit[c]<<" ";
-                c--;
-            }
-            
-            for(int i=0;i<32;i++)
-            {
-                if(t->next[abs(1-bit[i])]!=NULL)
-                {
-                    temp+=pow(2,31-i);
-                    //cout<<bit[i]<<" ";
-                    t=t->next[abs(1-bit[i])];
-                }
-                else 
-                    t=t->next[bit[i]];
-            }
-            ans=max(ans,temp);
+            make_tr(i);
+        }
+        for(auto i:nums)
+        {
+            ans=max(ans,max_xor(i));
         }
         return ans;
     }
