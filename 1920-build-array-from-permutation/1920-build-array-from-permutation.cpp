@@ -4,6 +4,7 @@ public:
        vector<int>ans;
         for(auto i:nums)
             ans.push_back(nums[i]);
+        
         return ans;
     }
 };
