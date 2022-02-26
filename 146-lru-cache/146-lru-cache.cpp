@@ -67,16 +67,7 @@ class LRUCache {
              
              return;
          }
-         //if this is the first node
-         if(front->prev==rear){
-             front->prev=newnode;
-             newnode->next=front;
-             newnode->prev=rear;
-             rear->next=newnode;
-             
-             mp[key]=newnode;
-             return;
-         }
+         
          //if size is less then just insert
          if(mp.size()<cap){
              Node* p=front->prev;
