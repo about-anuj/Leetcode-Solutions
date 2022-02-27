@@ -10,8 +10,9 @@ public:
         return ans;
     }
     long long minimumTime(vector<int>& time, int totalTrips) {
+        int mn=*min_element(begin(time),end(time));
         
-        long long l=1,r=1e14;
+        long long l=1,r=min((long long)1e14,(long long)mn*totalTrips);
         while(l<r){
             long long mid=(l+r)/2;
             
