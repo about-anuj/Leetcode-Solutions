@@ -1,12 +1,10 @@
 class Solution {
 public:
     string toLowerCase(string s) {
-        int j=0;
-        for(auto i:s)
+        //int j=0;
+        for(auto &i:s)
             if(isupper(i))
-               s[j++]=tolower(i);
-            else
-                j++;
+               i+=32;
         
         return s;
     }
