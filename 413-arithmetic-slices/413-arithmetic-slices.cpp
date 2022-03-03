@@ -8,13 +8,9 @@ public:
         {
             if(2*nums[i]==nums[i-1]+nums[i+1])
             {
-               int j=i-1;
+               int len=0;
                while(i<n-1 and 2*nums[i]==nums[i-1]+nums[i+1])
-                   i++;
-                
-               // i++;
-                int len=(i-j);
-                len-=1; //minimum size is 2 and after it we can simply apply formula
+                  len++, i++;
                 
                 if(len>=0){
                     ans+=(len*(len+1))/2;
