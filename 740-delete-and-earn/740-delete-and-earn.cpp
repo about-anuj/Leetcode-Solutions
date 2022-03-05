@@ -1,21 +1,17 @@
 class Solution {
 public:
-    int solve(unordered_map<int,int>&mp,int idx, vector<int>&dp)
-    {
-        if(idx>=10001)
-            return 0;
-        
-        if(dp[idx]!=-1)
-            return dp[idx];
-        
-       return dp[idx]=max(solve(mp,idx+2,dp)+mp[idx],solve(mp,idx+1,dp));
-    }
     int deleteAndEarn(vector<int>& nums) {
-        unordered_map<int,int>mp;
-        for(auto i:nums)
-            mp[i]+=i;
+        int n=10001;
         
-        vector<int>dp(10001,-1);
-        return solve(mp,0,dp);
+        vector<int>dp(10001,0),sum(10001,0);
+        for(auto i:nums)
+            sum[i]+=i;
+        
+        dp[0]=0;
+        dp[1]=sum[1];
+        for(int i=2;i<10001;i++)
+            dp[i]=max(dp[i-2]+sum[i],dp[i-1]);
+            
+        return dp[n-1];
     }
 };
