@@ -20,8 +20,8 @@ public:
         vector<vector<int>>ans;
         while(!q.empty())
         {
-            int sz=q.size();
-            vector<int>v;
+            int sz=q.size(),ind=0;
+            vector<int>v(sz,0);
             while(sz--)
             {
                TreeNode* t=q.front();
@@ -31,11 +31,13 @@ public:
                 if(t->right)
                     q.push(t->right);
                
-                v.push_back(t->val);
+                
+                if(even)
+                v[ind++]=t->val;
+                else
+                v[sz]=t->val;
             }
-            if(!even){
-                reverse(begin(v),end(v));
-            }
+            
             ans.push_back(v);
             //change odd to even and vice versa
             if(even) even=false;
