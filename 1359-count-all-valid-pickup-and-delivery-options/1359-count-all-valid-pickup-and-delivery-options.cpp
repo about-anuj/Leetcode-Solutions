@@ -7,9 +7,6 @@ public:
     long long mul(long long a, long long b){
         return mod(mod(a)*mod(b));
     }
-    long long add(long long a, long long b){
-        return mod(mod(a)+mod(b));
-    }
     
     int countOrders(int n) {
         
@@ -18,11 +15,11 @@ public:
         fact[0]=0;
         fact[1]=1;
         
-        for(int i=2;i<=n;i++)
+        for(int i=2;i<501;i++)
             fact[i]=mul(fact[i-1],(long long)i);
         
         ways[0]=1;
-       for(int i=1;i<=n;i++)
+       for(int i=1;i<501;i++)
            ways[i]=mul(ways[i-1],2LL*(i+1)-1);
         
         return mul(fact[n],ways[n-1]);
