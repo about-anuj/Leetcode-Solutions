@@ -12,10 +12,10 @@ public:
     int minMoves2(vector<int>& nums) {
         sort(begin(nums),end(nums));
         
-        if(nums.size()%2!=0){
+       // if(nums.size()%2!=0){
           return  calc(nums,nums[nums.size()/2]);
-        }
-        else
-          return min(calc(nums,nums[nums.size()/2]),calc(nums,nums[nums.size()/2-1]));  
+     //   }
+      //  else
+        //  return min(calc(nums,nums[nums.size()/2]),calc(nums,nums[nums.size()/2-1]));  
     }
 };
