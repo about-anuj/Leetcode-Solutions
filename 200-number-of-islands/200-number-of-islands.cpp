@@ -1,30 +1,57 @@
 class Solution {
 public:
-    //vector<vector<int>>vis;
-    void dfs(int i,int j,vector<vector<char>>&grid)
-    {
-        if(i<0 or j<0 or i>=grid.size() or j>=grid[0].size() or grid[i][j]=='0' )
-            return;
-        
-        //vis[i][j]=1;
-        grid[i][j]='0';
-        dfs(i,j+1,grid);
-        dfs(i+1,j,grid);
-        dfs(i-1,j,grid);
-        dfs(i,j-1,grid);
-    }
     int numIslands(vector<vector<char>>& grid) {
-      //  vis.resize(grid.size(),vector<int>(grid[0].size(),-1));
-        int ans=0;
-        for(int i=0;i<grid.size();i++){
-            for(int j=0;j<grid[0].size();j++)
+        queue<pair<int,int>>q;
+        int m=grid.size(),n=grid[0].size(),ans=0;
+        int nbr[]={0,1,0,-1,0};
+        
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
             {
-                if(grid[i][j]=='1'){
-                    dfs(i,j,grid);
-                    ans++;
-                }
+              if(grid[i][j]=='1')
+              {
+                  grid[i][j]='0';
+                  q.push({i,j});
+                  ans++;
+                  while(!q.empty())
+                  {
+                      pair<int,int>p=q.front();
+                      q.pop();
+                  for(int k=0;k<4;k++)
+                  {
+                    int x=p.first+nbr[k],y=p.second+nbr[k+1];
+                    if(x>=0 and x<m and y>=0 and y<n and grid[x][y]=='1'){
+                        grid[x][y]='0';
+                        q.push({x,y});
+                    }
+                  }
+                  }
+              }
             }
         }
         return ans;
     }
 };
+
+// for (int i = 0; i < m; i++) {
+//            for (int j = 0; j < n; j++) {
+//                if (grid[i][j] == '1') {
+//                    islands++;
+//                    grid[i][j] = '0';
+//                    queue<pair<int, int>> todo;
+//                    todo.push({i, j});
+//                      while (!todo.empty()) {
+//                        pair<int, int> p = todo.front();
+//                        todo.pop();
+//                        for (int k = 0; k < 4; k++) {
+//                            int r = p.first + offsets[k], c = p.second + offsets[k + 1];
+//                             if (r >= 0 && r < m && c >= 0 && c < n && grid[r][c] == '1') {
+//                                 grid[r][c] = '0';
+//                                 todo.push({r, c});
+//                             }
+//                         }
+//                     }
+//                 }
+//             }
+//         }
