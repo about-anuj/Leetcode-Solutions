@@ -5,14 +5,21 @@ public:
 
         //set the elements which are out of range
         for(int i=0;i<n;i++)
-        {
-            if(nums[i]<=0)
-                nums[i]=n+1;
+        { 
+            if(nums[i]==1)
+                c=1;
+            
+            if(nums[i]<=0 or nums[i]>n)
+                nums[i]=1;
+            
         }
-        //
+        
+        if(c==0)
+            return 1;
+        
         for(int i=0;i<n;i++){
-            if(abs(nums[i])<=n and nums[abs(nums[i])-1]>0)
-                nums[abs(nums[i])-1]*=-1;
+            int ind=abs(nums[i]);
+            nums[ind-1]=-1*abs(nums[ind-1]);
         }
         
         for(int i=0;i<n;i++)
