@@ -23,6 +23,8 @@ public:
                 while(temp and temp->val==cur)
                     temp=temp->next;
                 
+                prev->next=temp;
+                
             }
             else{
             prev->next=temp;
