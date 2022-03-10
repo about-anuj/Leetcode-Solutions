@@ -14,40 +14,30 @@ public:
         auto dummy=new ListNode(0);
         auto t=dummy;
         int carry=0;
-        while(l1 and l2){
-            int val=l1->val+l2->val+carry;
+        while(l1 or l2){
+            int val=carry;
+            if(l1)
+            {
+                val+=l1->val;
+                l1=l1->next;
+            }
+            if(l2){
+                val+=l2->val;
+                l2=l2->next;
+            }
+           // int val=l1->val+l2->val+carry;
             carry=val/10;
             val=val%10;
             auto cur=new ListNode(val);
             t->next=cur;
             t=cur;
-            l1=l1->next;
-            l2=l2->next;
+            
+            if(!l1 and !l2 and carry>0){
+               auto cur=new ListNode(carry);
+               t->next=cur;  
+            }
         }
         
-        while(l1){
-            int val=l1->val+carry;
-            carry=val/10;
-            val=val%10;
-            auto cur=new ListNode(val);
-            t->next=cur;
-            t=cur;
-            l1=l1->next;
-        }
-        while(l2){
-             int val=l2->val+carry;
-            carry=val/10;
-            val=val%10;
-            auto cur=new ListNode(val);
-            t->next=cur;
-            t=cur;
-            l2=l2->next;
-        }
-        if(carry)
-        {
-            auto cur=new ListNode(carry);
-            t->next=cur;
-        }
         return dummy->next;
     }
 };
