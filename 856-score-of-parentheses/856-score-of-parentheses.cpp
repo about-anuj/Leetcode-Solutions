@@ -13,22 +13,16 @@ public:
             }
             else
             {
-                if(st.top()==0)
+                int val=st.top();
+                st.pop();
+                if(val==0)
                 {
-                    st.pop();
-                    int val=st.top()+1;
-                    st.pop();
-                    st.push(val);
-                  //  c=1;
+                   val=1;
                 }
-                else{
-                    int val=2*st.top();
-                    st.pop();
-                    val+=st.top();
-                    st.pop();
-                    st.push(val);
-                   // st.top()+=2*val;
+                else{ 
+                    val*=2;
                 }
+                st.top()+=val;
             }
         }
         
