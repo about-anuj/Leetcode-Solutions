@@ -10,28 +10,30 @@ public:
         
             if(nums[mid]==tgt) return 1;
             
-            if(nums[mid]<nums[l])
+            //list is in order
+           if(nums[l]<=nums[mid])
             {
-             if(tgt<=nums[r] and nums[mid]<tgt)
-                 l=mid+1;
-                else
-                    r=mid-1;
-                
+               if(tgt>=nums[l] and nums[mid]>tgt) r=mid-1;
+               else l=mid+1;
             }
-            else if(nums[mid]>nums[r])
-            {
-               if(nums[mid]>tgt and nums[l]<=tgt)
-                    r=mid-1;
-                else
-                   l=mid+1;
-            }
-            else{
-                if(nums[mid]>=tgt)
-                    r=mid-1;
-                else
-                    l=mid+1;
-            }
+           else 
+           {
+             if(tgt<=nums[r] and nums[mid]<tgt) l=mid+1;
+               else r=mid-1;
+           }
         }
         return 0;
+        
+        
+        // else if(nums[left] <= nums[mid])
+        //     {
+        //         if( (nums[left]<=target) && (nums[mid] > target) ) right = mid-1;
+        //         else left = mid + 1; 
+        //     }
+        //     else
+            //{
+               // if((nums[mid] < target) &&  (nums[right] >= target) ) left = mid+1;
+                //else right = mid-1;
+           // }
     }
 };
