@@ -29,17 +29,16 @@ public:
                 l++,r--;
             
             
-          else if(s[l]!=s[r])
+          else
             {
-              c++;
-              if( (ispalin(s,l) or ispalin(s,r)))
-                return true;
+             int l1=l,l2=l+1,r1=r-1,r2=r;
+              while(l1<r1 and s[l1]==s[r1]) l1++,r1--;
+              while(l2<r2 and s[l2]==s[r2]) l2++,r2--;
               
-               if( !(ispalin(s,l) and !ispalin(s,r)))
-                   return false;
+              return l1>=r1 or l2>=r2;
             }
         }
       //  cout<<c;
-        return c<=1;
+        return 1;
     }
 };
