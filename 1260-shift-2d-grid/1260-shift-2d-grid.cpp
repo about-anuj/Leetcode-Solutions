@@ -7,6 +7,7 @@ public:
             for(auto j:i)
                 dq.push_back(j);
         
+        k%=(m*n);
         while(k--)
         {
             int b=dq.back();
