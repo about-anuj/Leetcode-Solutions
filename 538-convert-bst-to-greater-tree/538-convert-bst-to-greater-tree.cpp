@@ -11,33 +11,18 @@
  */
 class Solution {
 public:
-    vector<TreeNode*>node;
-    vector<int>v;
-    void in(TreeNode* r)
+   int s=0;
+    void calc(TreeNode* r)
     {
         if(!r) return;
-        in(r->left);
-        v.push_back(r->val);
-        node.push_back(r);
-        in(r->right);
-    }
-    int calc(TreeNode* r)
-    {
-        if(!r) return 0;
-        int x=calc(r->left);
-        int y=calc(r->right);
-        return x+y+r->val;
+        calc(r->right);
+        s+=r->val;
+        r->val=s;
+        calc(r->left);
     }
     TreeNode* convertBST(TreeNode* root) {
-        if(!root) return root;
-        in(root);
-        int s=calc(root);
-        node[0]->val=s;
-        for(int i=1;i<v.size();i++)
-        {
-            node[i]->val=s-v[i-1];
-            s-=v[i-1];
-        }
+        //if(!root) return root;
+        calc(root);
         return root;
     }
 };
