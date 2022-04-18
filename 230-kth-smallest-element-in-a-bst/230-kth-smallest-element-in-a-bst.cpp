@@ -12,15 +12,18 @@
 class Solution {
 public:
     int c,ans;
+    bool find=false;
     void calc(TreeNode* r)
     {
-        if(!r) return ;
+        if(!r or find) return ;
         calc(r->left);
         
         c--;
-        if(c==0)
+        if(c==0){
           ans=r->val;
-        
+            find=true;
+            return;
+        }
         calc(r->right);
     }
     int kthSmallest(TreeNode* root, int k) {
