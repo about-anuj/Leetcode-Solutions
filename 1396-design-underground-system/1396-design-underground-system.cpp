@@ -1,7 +1,7 @@
 class UndergroundSystem {
 public:
     unordered_map<int,pair<string,int>>in;
-       unordered_map<string,pair<int,int>>avg;
+       unordered_map<string,vector<int>>avg;
     UndergroundSystem() {
        
     }
@@ -15,16 +15,20 @@ public:
         string st=in[id].first;
         int t1=in[id].second;
         string route=st+"_"+end;
-        
-        //route,sum,no. of time
-            avg[route].first+=(t2-t1);
-            avg[route].second+=1;
-        
+        //route,sum,no. of times
+        if(avg.count(route)==0)
+        {
+            avg[route]={(t2-t1),1};
+        }
+        else{
+            avg[route][0]+=(t2-t1);
+            avg[route][1]+=1;
+        }
     }
     
     double getAverageTime(string st, string end) {
         string route=st+"_"+end;
-        return (double) avg[route].first/avg[route].second;
+        return (double) avg[route][0]/avg[route][1];
     }
 };
 
