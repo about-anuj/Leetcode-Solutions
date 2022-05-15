@@ -11,27 +11,17 @@
  */
 class Solution {
 public:
+    int getDepthOfTree(TreeNode* root){
+        if(!root) return 0;
+        return 1+max(getDepthOfTree(root->left), getDepthOfTree(root->right));
+    }
+    int deepestLeavesSum(TreeNode* root, int level){
+        if(!root) return 0;
+        if(level==1) return root->val;
+        return deepestLeavesSum(root->left,level-1) + deepestLeavesSum(root->right,level-1);
+    }
     int deepestLeavesSum(TreeNode* root) {
-      queue<TreeNode*>q;
-        q.push(root);
-        int ans=0;
-        while(!q.empty())
-        {
-            int sz=q.size();
-            //bool deep=true;
-            ans=0;
-            while(sz--)
-            {
-                TreeNode* t=q.front();
-                q.pop();
-                if(t->left)
-                    q.push(t->left);
-                if(t->right)
-                    q.push(t->right);
-                
-                ans+=t->val;
-            }
-        }
-        return ans;
+        int depth(getDepthOfTree(root));
+        return deepestLeavesSum(root,depth);
     }
 };
