@@ -11,7 +11,6 @@
 class Solution {
 public:
   
-    //TreeNode* ans=NULL;
     TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target) {
         
         if(!original) return NULL;
@@ -19,8 +18,10 @@ public:
             return cloned;
         }
         TreeNode* l=getTargetCopy(original->left,cloned->left,target);
+        if(l) return l;
         TreeNode* r=getTargetCopy(original->right,cloned->right,target);
+        if(r) return r;
         
-        return l?l:r;
+        return NULL;
     }
 };
