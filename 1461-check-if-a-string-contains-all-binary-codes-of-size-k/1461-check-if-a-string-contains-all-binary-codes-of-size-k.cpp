@@ -1,6 +1,7 @@
 class Solution {
 public:
     bool hasAllCodes(string s, int k) {
+        if(k>16) return false;
         int ans=pow(2,k);
         unordered_set<string>st;
         int n=s.size();
