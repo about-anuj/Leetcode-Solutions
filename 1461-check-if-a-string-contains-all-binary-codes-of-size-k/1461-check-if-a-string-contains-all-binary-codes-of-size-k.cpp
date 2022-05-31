@@ -6,8 +6,8 @@ public:
         int n=s.size();
         for(int i=0;i<=n-k;i++)
         {
-            string temp=s.substr(i,k);
-            st.insert(temp);
+           // string temp=;
+            st.insert(s.substr(i,k));
         }
         return st.size()==ans;
     }
