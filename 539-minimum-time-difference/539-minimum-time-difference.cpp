@@ -1,27 +1,25 @@
 class Solution {
 public:
     int findMinDifference(vector<string>& time) {
-        map<int,int>mp;
-        for(auto i:time)
+       sort(begin(time),end(time));
+        int n=time.size();
+        int ans=INT_MAX;
+        for(int i=0;i<time.size();i++)
         {
-            int x=60*stoi(i.substr(0,2));
-            int y=stoi(i.substr(3,2));
-            mp[x+y]++;
-            mp[x+y+1440]++;
+            int diff=abs(mindif(time[(i+1)%n],time[i]));
+//cout<<diff<<" ";
+            diff=min(diff,1440-diff);
+            ans=min(ans,diff);
         }
+        return ans;
+    }
+    private:
+    int mindif(string& s1, string& s2){
+        int h1=stoi(s1.substr(0,2));
+        int h2=stoi(s2.substr(0,2));
+        int m1=stoi(s1.substr(3,2));
+        int m2=stoi(s2.substr(3,2));
         
-        int mn[(int)mp.size()],j=0;
-       for(auto i:mp)
-       {
-          mn[j++]=i.first;
-           if(i.second>1)
-               return 0;
-       }
-        j=INT_MAX;
-      for(int i=1;i<mp.size();i++)
-      {
-          j=min(j,(int)(mn[i]-mn[i-1]));
-      }
-        return j;
+        return 60*(h2-h1)+m2-m1;
     }
 };
