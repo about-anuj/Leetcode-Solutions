@@ -14,7 +14,7 @@ public:
         return ans;
     }
     private:
-    int mindif(string& s1, string& s2){
+    int mindif(string& s2, string& s1){
         int h1=stoi(s1.substr(0,2));
         int h2=stoi(s2.substr(0,2));
         int m1=stoi(s1.substr(3,2));
