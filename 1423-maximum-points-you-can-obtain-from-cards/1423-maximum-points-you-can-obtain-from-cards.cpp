@@ -2,21 +2,17 @@ class Solution {
 public:
     int maxScore(vector<int>& cards, int k) {
         int n=cards.size();
-        int i=0,j=0,cur=0,mn=INT_MAX;
-        int sz=n-k;
-        while(j<n){
-           if(j-i<sz){
-               cur+=cards[j++];
-               if(j-i==sz){
-                   mn=min(mn,cur);
-               }
-           } 
-            else{
-                cur-=cards[i++];
-            }
-            
+        int j=n-k,i=0;
+        
+        int cur=accumulate(begin(cards)+j,end(cards),0);
+        int ans=INT_MIN;
+        while(j<=n)
+        {
+            ans=max(ans,cur);
+            if(j==n) break;
+            cur-=cards[j++];
+            cur+=cards[i++];
         }
-        int total=accumulate(begin(cards),end(cards),0);
-        return total-mn;
+        return ans;
     }
 };
