@@ -2,7 +2,7 @@ class Solution {
 public:
     int candy(vector<int>& ratings) {
         int j=0,ans=0,n=ratings.size();
-       vector<int>l2r(ratings.size(),1),r2l(n,1);
+       vector<int>l2r(ratings.size(),1);
        priority_queue<pair<int,int>>pq;
         
         for(int i=1;i<n;i++){
