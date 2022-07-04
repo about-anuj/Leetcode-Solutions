@@ -11,10 +11,9 @@ public:
         }
         for(int i=n-2;i>=0;i--)
             if(ratings[i]>ratings[i+1])
-                r2l[i]=r2l[i+1]+1;
+                l2r[i]=max(l2r[i],l2r[i+1]+1);
         
-        for(int i=0;i<n;i++)
-            ans+=max(r2l[i],l2r[i]);
-        return ans;
+        
+        return accumulate(begin(l2r),end(l2r),0);
     }
 };
