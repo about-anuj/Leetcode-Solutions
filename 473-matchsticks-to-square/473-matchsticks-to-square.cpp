@@ -1,33 +1,32 @@
 class Solution {
 public:
-    bool calc(vector<int>&a, int len, int sum, int j, int rem,vector<bool>&vis)
+    bool vis[20];
+    bool calc(vector<int>&st, int i, int n, int cursum, int req,int k)
     {
-        if(rem==0) return 1;
+        if(k==1)
+            return true;
+        if(cursum==req)
+            return calc(st,0,n,0,req,k-1);
         
-        if(sum==len)
-            return calc(a,len,0,0,rem-1,vis);
-        
-        for(int i=j;i<a.size();i++)
-        {
-            if(sum+a[i]>len or vis[i]) continue;
-            
-            vis[i]=1;
-            
-            if(calc(a,len,sum+a[i],i+1,rem,vis))
-                return 1;
-            
-            vis[i]=0;
-            
+        for(int j=i;j<n;j++){
+            if(!vis[j]){
+                vis[j]=true;
+                if(calc(st,j+1,n,cursum+st[j],req,k))
+                    return true;
+                vis[j]=false;
+            }
         }
-        return 0;
+        return false;
     }
-    bool makesquare(vector<int>& mst) {
-        int total=accumulate(begin(mst),end(mst),0);
+    bool makesquare(vector<int>& stick) {
+       int t=accumulate(begin(stick),end(stick),0),x=0;
+        sort(begin(stick),end(stick));
+        memset(vis,false,sizeof(vis));
         
-        if(total%4!=0) return 0;
+        if(t%4!=0) return false;  //we want to use all sticks
         
-        int len=total/4;
-        vector<bool>vis(mst.size(),false);
-        return calc(mst,len,0,0,4,vis);
+       
+        
+        return calc(stick,0,stick.size(),0,t/4,4);
     }
 };
