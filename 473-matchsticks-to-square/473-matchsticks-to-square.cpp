@@ -5,9 +5,11 @@ public:
     {
         if(k==1)
             return true;
+        
         if(cursum==req)
             return calc(st,0,n,0,req,k-1);
         
+        if(cursum>req) return 0;
         for(int j=i;j<n;j++){
             if(!vis[j]){
                 vis[j]=true;
