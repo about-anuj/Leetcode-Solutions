@@ -8,19 +8,16 @@ public:
         for(auto i:words2)
         {
             unordered_map<char,int>t;
-            for(auto j:i)
+            for(auto &j:i)
             {
                 t[j]++;
                 //store max freq and if that char is present in the word1 then it should have greater or                     //equal freq
-                if(freq.count(j))
                 freq[j]=max(freq[j],t[j]);
-                else
-                    freq[j]=t[j];
-            }
+             }
             
         }
         
-        for(auto i:words1)
+        for(auto &i:words1)
         {
             unordered_map<char,int>temp;
             bool ok=true;
