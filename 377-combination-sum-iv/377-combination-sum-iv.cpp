@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int dp[2000001];
+    int dp[1001];
     int calc(vector<int>&nums,int tgt)
     {
         if(tgt==0) return 1;
