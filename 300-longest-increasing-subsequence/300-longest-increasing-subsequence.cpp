@@ -3,12 +3,7 @@ public:
     int lengthOfLIS(vector<int>& nums) {
         int k=nums.size();
         vector<vector<int>>dp(nums.size()+1,vector<int>(nums.size()+1,-1));
-	    for(int i = 0; i <= k; i++) {
-		    //ans[i] = new int[k+1];
-		    for(int j = 0; j <= k; j++) {
-		    	dp[i][j] = -1;
-		    }
-	    }
+	    
         return lis(-1,0,nums,dp);
     }
     int lis(int prev,int curr,vector<int>& arr,vector<vector<int>>&dp){
