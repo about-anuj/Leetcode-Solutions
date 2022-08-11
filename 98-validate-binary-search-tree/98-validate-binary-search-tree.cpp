@@ -11,27 +11,27 @@
  */
 class Solution {
 public:
-    int prec(TreeNode* r)
-    {
-        while(r->right) r=r->right;
-        return r->val;
-    }
-    int suc(TreeNode* r)
-    {
-        while(r->left) r=r->left;
-        return r->val;
-    }
-    bool calc(TreeNode* r)
+    bool calc(TreeNode* r,long mn,long mx)
     {
         if(!r) return true;
-        if(r->left and prec(r->left)>=r->val)
+        if(mn>=r->val)
             return false;
-        if(r->right and suc(r->right)<=r->val)
+        if( mx<=r->val)
             return false;
         
-        return calc(r->left) and calc(r->right);
+        return calc(r->left,mn,r->val) and calc(r->right,r->val,mx);
     }
     bool isValidBST(TreeNode* root) {
-        return calc(root);
+        return calc(root,LONG_MIN,LONG_MAX);
     }
 };
+
+// bool isValidBST(TreeNode* root) {
+//         return help(root, LONG_MIN, LONG_MAX);
+//     }
+    
+//     bool help(TreeNode* root, long min, long max){
+//         if(!root)   return true;
+//         if(root->val <= min || root->val >= max)  return false;
+//         return help(root->left, min, root->val) && help(root->right, root->val, max);
+//     }
