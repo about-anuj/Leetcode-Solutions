@@ -11,22 +11,23 @@
  */
 class Solution {
     int tgt;
+    TreeNode* root;
 public:
     void calc(TreeNode* cur,TreeNode* par,int l, int r)
     {
         if(!cur) return ;
-        //cout<<cur->val<<" "<<l<<" "<<r<<endl;
         
-        
+        ///post order traversal bcz we need to traverse leaves first
         calc(cur->left,cur,1,0);
         calc(cur->right,cur,0,1);
-        //check if it is leaf and equal to tgt
         
-        if(!cur->left and !cur->right and cur->val==tgt)
+
+        //check if it is leaf and equal to tgt
+        if(cur->left==cur->right and cur->val==tgt)
         {
             //if root itself leaf and tgt
             if(l==0 and r==0)
-                cur=NULL;
+                root=NULL;
             else if(l==1)
                 par->left=NULL;
             else
@@ -38,9 +39,10 @@ public:
     TreeNode* removeLeafNodes(TreeNode* root, int target) {
         
         TreeNode* par=NULL;
+        this->root=root;
         this->tgt=target;
         calc(root,par,0,0);
-        if(root and !root->left and !root->right and root->val==target) return NULL;
-        return root;
+        //if(root->left==root->right and root->val==target) return NULL;
+        return this->root;
     }
 };
