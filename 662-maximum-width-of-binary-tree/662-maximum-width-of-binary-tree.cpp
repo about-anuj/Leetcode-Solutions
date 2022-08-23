@@ -12,26 +12,27 @@
 class Solution {
 public:
     int widthOfBinaryTree(TreeNode* root) {
-             unsigned long long   int ans=0,mod=1e9+7;
-        queue<pair<TreeNode*,unsigned long long int>>q;
-        q.push({root,1});
-        
-        //BFS
-        while(!q.empty()){
-          unsigned long long   int sz=q.size();
-          unsigned long long   int l=q.front().second,r=1;
-            while(sz--){
-                TreeNode* temp=q.front().first;
-                r=q.front().second;
-                q.pop();
-                
-                if(temp->left)
-                    q.push({temp->left,(2*r)});
-                if(temp->right)
-                    q.push({temp->right,(2*r)+1});
+        queue<pair<TreeNode*,unsigned int >>q;
+        q.push({root,0});
+        unsigned int ans=0;
+        while(!q.empty())
+        {
+           unsigned  int end=q.back().second,st=q.front().second;
+           unsigned  int sz=q.size();
+            ans=max(ans,end-st+1);
+           // cout<<ans<<endl;
+            while(sz--)
+            {
+              TreeNode* t=q.front().first;
+              unsigned int ind=q.front().second-st;
+             // cout<<ind<<" ";
+              q.pop();
+              
+              if(t->left) q.push({t->left,2*ind+1});
+              if(t->right) q.push({t->right,2*ind+2});
             }
-            ans=max(ans,r-l+1);
+            cout<<endl;
         }
-        return (int)ans;
+        return ans;
     }
 };
