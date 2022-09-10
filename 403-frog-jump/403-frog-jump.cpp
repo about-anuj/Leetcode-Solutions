@@ -1,44 +1,60 @@
 class Solution {
 public:
-    unordered_map<int,int>mp;
-    bool calc(vector<int>&stones, int i, int k, vector<vector<int>>&dp)
+    int dp[2001][2001];
+    bool calc(vector<int>&stones,unordered_map<int,int>&mp,int curind,int jump,int n)
     {
-        //if reached to front bank
-        if(i==stones.size()-1)
-            return true;
+        if(curind==n-1) return true;
+        if(curind>=n) return 0;
         
-        if(i>=stones.size()) 
-          return false;
-  	
-        if(dp[i][k]!=-1) // if we already encountered this state ,we'll simply return it
-          return dp[i][k]; 
-    
+        if(dp[curind][jump]!=-1) return dp[curind][jump];
         bool ans=false;
-        for(int j=-1;j<=1;j++)
+        for(int i=-1;i<=1;i++)
         {
-            int next_step=k+j;
-            if(next_step>0)
+            int n_step=jump+i;
+if(n_step>0 and mp.count(n_step+stones[curind])>0 and stones[curind]+n_step==stones[mp[n_step+stones[curind]]])
             {
-               if(!mp.count(next_step+stones[i]))
-                   continue;
-            
-                int ind=mp[next_step+stones[i]];
-                if(stones[ind]!=stones[i]+next_step)
-                    continue;
-                
-                ans=ans || calc(stones,ind,next_step,dp);
+                ans =ans|| calc(stones,mp,mp[n_step+stones[curind]],n_step,n);
             }
         }
-        
-        return dp[i][k]=ans;
+        return dp[curind][jump]=ans;
     }
     bool canCross(vector<int>& stones) {
-       int n=stones.size();
-        vector<vector<int>>dp(2000,vector<int>(2000,-1));
-        //dp[n+1][3];
-        for(int i=0;i<n;i++)
-            mp[stones[i]]=i;
-        
-        return calc(stones,0,0,dp);
+        unordered_map<int,int>mp;
+        int j=0;
+        memset(dp,-1,sizeof(dp));
+        for(auto i=0;i<stones.size();i++) mp[stones[i]]=i;
+        return calc(stones,mp,0,0,stones.size());
     }
 };
+
+//  bool calc(vector<int>&stones, int i, int k, vector<vector<int>>&dp)
+//     {
+//         //if reached to front bank
+//         if(i==stones.size()-1)
+//             return true;
+        
+//         if(i>=stones.size()) 
+//           return false;
+  	
+//         if(dp[i][k]!=-1) // if we already encountered this state ,we'll simply return it
+//           return dp[i][k]; 
+    
+//         bool ans=false;
+//         for(int j=-1;j<=1;j++)
+//         {
+//             int next_step=k+j;
+//             if(next_step>0)
+//             {
+//                if(!mp.count(next_step+stones[i]))
+//                    continue;
+            
+//                 int ind=mp[next_step+stones[i]];
+//                 if(stones[ind]!=stones[i]+next_step)
+//                     continue;
+                
+//                 ans=ans || calc(stones,ind,next_step,dp);
+//             }
+//         }
+        
+//         return dp[i][k]=ans;
+//     }
