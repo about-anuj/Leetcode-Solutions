@@ -21,21 +21,16 @@ public:
             if(i.second>0 and i.second%2!=0) indi++;
             len+=i.second;
         }
-        if(len%2!=0 and indi>1) return false;
-        if(len%2==0 and indi>0) return false;
+        if(indi>1) return false;
         return true;
     }
     void in(TreeNode* r)
     {
         if(!r) return;
-        if(r->left==r->right)
-        {
-            mp[r->val]++;
-            if(check()) ans++;
-            mp[r->val]--;
-            return;
-        }
-        mp[r->val]++;
+         mp[r->val]++;
+        
+        if(r->left==r->right and check()) ans++;
+        
         in(r->left);
         in(r->right);
         mp[r->val]--;
