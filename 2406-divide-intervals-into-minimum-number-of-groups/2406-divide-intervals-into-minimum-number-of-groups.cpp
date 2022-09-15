@@ -1,7 +1,7 @@
 class Solution {
 public:
     int minGroups(vector<vector<int>>& inter) {
-        sort(begin(inter),end(inter));
+        // sort(begin(inter),end(inter));
         int mx=0,t=0;
         
         vector<vector<int>>pre;
