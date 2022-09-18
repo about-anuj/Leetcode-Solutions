@@ -10,6 +10,7 @@ public:
                 set=i;
             }
         }
+        //if more than one set bit or no bit set i.e. number is 0
         if(cnt>1 or set==-1) return 0;
         
         return (set)%2==0;
