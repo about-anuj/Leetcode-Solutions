@@ -9,7 +9,6 @@ public:
         vis[st-'a']=1;
         if(st==tgt)
         {
-            // cout<<tgt;
             found=true;
             return;
         }
@@ -24,9 +23,8 @@ public:
         
         for(auto i:eq)
         {
-            // if(!vis[i[0]-'a'] or !vis[i[3]-'a'])
-            // {
-                // cout<<i[0]<<" "<<i[3]<<endl;
+            //if sign is == then we have to add both character into same graph
+            //else they will not be part of each other
                 if(i.substr(1,2)=="==")
                 {
                    g[i[0]].push_back(i[3]);
@@ -35,20 +33,14 @@ public:
                      vis[i[3]-'a']=1;
                 }
                
-            // }
         }
-        // for(auto i:g)
-        // {
-        //     cout<<i.first<<":";
-        //     for(auto j:i.second)
-        //         cout<<j<<" ";
-        //     cout<<endl;
-        // }
+      
         for(auto i:eq)
         {
             vector<int>v(26,0);
                 found=false;
                 dfs(i[0],v,i[3]);
+            // if sign is == then found should be true because both are supposed to part of same graph
                 if(i.substr(1,2)=="==" and !found)
                     return 0;
                 else if(i.substr(1,2)=="!=" and found) 
