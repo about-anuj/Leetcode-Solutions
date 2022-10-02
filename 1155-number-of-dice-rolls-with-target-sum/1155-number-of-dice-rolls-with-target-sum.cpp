@@ -4,13 +4,11 @@ public:
     const int mod=1e9+7;
     int calc(int n,int k,int tgt)
     {
-        // if(n==-1) return 0;
         if(tgt<0) return 0;
-        if(n==0 and tgt==0) return dp[n][k][tgt]=1;
-        if(n==0) return dp[n][k][tgt]=0;
+        if(n==0 or tgt==0) return dp[n][k][tgt]=(n==tgt);
         
         if(dp[n][k][tgt]!=-1) return dp[n][k][tgt];
-        // cout<<tgt<<" ";
+     
         long long ways=0;
         for(int i=1;i<=k;i++)
         {
