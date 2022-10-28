@@ -23,7 +23,7 @@ public:
                 mxfind=true;
             }
             if(mnfind and mxfind)
-                res=(res+min(mnl,mxl)-start+1);
+              (res+=min(mnl,mxl)-start+1);
         }
         return res;
     }
