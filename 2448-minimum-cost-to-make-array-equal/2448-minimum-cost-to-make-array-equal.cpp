@@ -10,6 +10,11 @@ public:
         sort(begin(v),end(v));
         vector<long long>pre(n),suf(n);
         long long costsum=0,combined=0;
+        
+        //A1,A2,A3,A4,A5
+        //C1,C2,C3,C4,C5
+        //FOR PIVOT AT 3
+        //CALCULATE PRE AND SUF
         for(int i=0;i<n;i++)
         {
             long long ni=v[i].first,ci=v[i].second;
