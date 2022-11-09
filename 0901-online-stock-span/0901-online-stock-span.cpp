@@ -6,11 +6,6 @@ public:
     }
     
     int next(int price) {
-        if(st.size()==0)
-        {
-            st.push({price,1});
-            return 1;
-        }
         int span=1;
         while(!st.empty() and st.top().first<=price)
         {
