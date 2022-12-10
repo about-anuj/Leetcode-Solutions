@@ -26,28 +26,22 @@ string buildLowestNumber(string num, int k)
     stack<char>st;
     for(auto i:num)
     {
-        
-            while(st.size() and st.top()>i and k>0)
-            st.pop(),--k;
+        while(st.size() and st.top()>i and k>0)
+           st.pop(),--k;
             
-            st.push(i);
+        st.push(i);
     }
     while(k--)
-    {
         st.pop();
-    }
+        
     num.erase();
-    bool allzero=true;
     while(st.size())
     {
         num.push_back(st.top());
-        // cout<<st.top()<<" ";
-        if(st.top()>'0') allzero=false;
         st.pop();
     }
-    if(allzero) return "0";
     reverse(begin(num),end(num));
     int i=0;
     while(i<num.size() and num[i]=='0') i++;
-    return num.substr(i);
+    return i>=num.size()?"0":num.substr(i);
 }
