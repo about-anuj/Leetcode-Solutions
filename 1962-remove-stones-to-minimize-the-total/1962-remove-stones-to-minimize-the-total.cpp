@@ -13,12 +13,9 @@ public:
         {
             int t=pq.top();
             pq.pop();
-            int f=t;
-            if(t%2==0) t/=2;
-            else t=t/2+1;
             
-            sm-=(f-t);
-            pq.push(t);
+            sm-=(t/2);
+            pq.push(t-t/2);
         }
         return sm;
     }
