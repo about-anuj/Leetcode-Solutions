@@ -5,14 +5,14 @@ public:
         for(int i=0;i<m;i++)
         { 
             string t="";
-            for(int j=0;j<n;j++)
+            for(int j=1;j<n;j++)
             {
-                t+=s[j][i];
-            }
-            string a=t;
-            sort(begin(t),end(t));
-            if(a!=t)
-                res++;
+                if(s[j][i]<s[j-1][i])
+                {
+                    res++;
+                    break;
+                }
+            } 
         }
         return res;
     }
