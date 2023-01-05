@@ -17,6 +17,6 @@ public:
               res++;
           }
         }
-        return res+1;
+        return res+1;  //at first we didnt provided any burstpoints
     }
 };
